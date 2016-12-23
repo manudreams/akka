@@ -48,10 +48,5 @@ public class DemoActor extends AbstractActor {
     }
 }
 
-public class SomeOtherActor extends AbstractActor {
-    // Props(new DemoActor(42)) would not be safe
-    ActorRef demoActor = context().actorOf(DemoActor.props(42), "demo");
-    // ...
-}
 
 
