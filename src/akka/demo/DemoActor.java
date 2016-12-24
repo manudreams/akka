@@ -20,33 +20,30 @@ import akka.actor.Props;
 import akka.japi.pf.ReceiveBuilder;
 
 /**
- Description of class goes here
-
- @author Maneesh Sharma */
+ * Description of class goes here
+ * 
+ * @author Maneesh Sharma
+ */
 public class DemoActor extends AbstractActor {
-    /**
-     * Create Props for an actor of this type.
-     * @param magicNumber The magic number to be passed to this actor’s constructor.
-     * @return a Props for creating this actor, which can then be further configured
-     *         (e.g. calling `.withDispatcher()` on it)
-     */
-    static Props props(Integer magicNumber) {
-        // You need to specify the actual type of the returned actor
-        // since Java 8 lambdas have some runtime type information erased
-        return Props.create(DemoActor.class, () -> new DemoActor(magicNumber));
-    }
+  /**
+   * Create Props for an actor of this type.
+   * 
+   * @param magicNumber The magic number to be passed to this actor’s constructor.
+   * @return a Props for creating this actor, which can then be further configured (e.g. calling `.withDispatcher()` on
+   * it)
+   */
+  static Props props(Integer magicNumber) {
+    // You need to specify the actual type of the returned actor
+    // since Java 8 lambdas have some runtime type information erased
+    return Props.create(DemoActor.class, () -> new DemoActor(magicNumber));
+  }
 
-    private final Integer magicNumber;
+  private final Integer magicNumber;
 
-    DemoActor(Integer magicNumber) {
-        this.magicNumber = magicNumber;
-        receive(ReceiveBuilder.
-                match(Integer.class, i -> {
-                    sender().tell(i + magicNumber, self());
-                }).build()
-        );
-    }
+  DemoActor(Integer magicNumber) {
+    this.magicNumber = magicNumber;
+    receive(ReceiveBuilder.match(Integer.class, i -> {
+      sender().tell(i + magicNumber, self());
+    }).build());
+  }
 }
-
-
-
